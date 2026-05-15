@@ -26,6 +26,7 @@ export const days = [
   {
     day: 1, date: 'Thu 4 Jun', location: 'Phayao',
     title: 'Arrival → Drive to Phayao', emoji: '✈️', theme: 'arrival',
+    weather: { icon: '🌤️', desc: 'Partly cloudy', high: 31, low: 24 },
     activities: [
       { time: '17:40', label: 'Land at Chiang Mai Airport (CNX)', name: 'Chiang Mai Airport', coords: [18.768, 98.963], photos: [
         { full: 'https://8adventures.com/wp-content/uploads/2025/11/Aeropuerto-Internacional-de-Chiang-Mai.jpg', title: 'Chiang Mai International Airport' },
@@ -53,6 +54,7 @@ export const days = [
   {
     day: 2, date: 'Fri 5 Jun', location: 'Phayao',
     title: 'Kwan Phayao Lake + Friday Walking Street', emoji: '🌊', theme: 'culture',
+    weather: { icon: '🌦️', desc: 'Afternoon showers', high: 30, low: 23 },
     activities: [
       { time: '07:00', label: 'Hotel free breakfast — take it slow' },
       { time: '08:30', label: 'Morning walk along Kwan Phayao lakefront promenade — flat, paved, stroller-friendly', name: 'Kwan Phayao', coords: [19.166, 99.904], commonsCategory: 'Phayao_lake' },
@@ -71,6 +73,7 @@ export const days = [
   {
     day: 3, date: 'Sat 6 Jun', location: 'Phayao → Chiang Rai (day trip)',
     title: 'Chiang Rai Day Trip — White & Blue Temples', emoji: '⛩️', theme: 'adventure',
+    weather: { icon: '⛅', desc: 'Mostly cloudy, chance of rain', high: 31, low: 24 },
     activities: [
       { time: '07:30', label: 'Hotel breakfast, pack baby bag, load car' },
       { time: '08:00', label: 'Depart for Chiang Rai (~90 km, ~1.5 hrs)', name: 'Chiang Rai', coords: [19.910, 99.840] },
@@ -87,6 +90,7 @@ export const days = [
   {
     day: 4, date: 'Sun 7 Jun', location: 'Phayao',
     title: 'Rest Day — Lake Boat + Local Markets', emoji: '🛶', theme: 'culture',
+    weather: { icon: '🌧️', desc: 'Scattered showers', high: 29, low: 23 },
     activities: [
       { time: '07:00', label: 'Hotel breakfast — relaxed morning' },
       { time: '08:30', label: 'Longtail boat trip on Kwan Phayao — peaceful, minimal walking, elders sit comfortably. ~500–800 THB total.', name: 'Kwan Phayao', coords: [19.166, 99.904], commonsCategory: 'Phayao_lake' },
@@ -103,6 +107,7 @@ export const days = [
   {
     day: 5, date: 'Mon 8 Jun', location: 'Phayao → Chiang Mai',
     title: 'Drive Back to Chiang Mai', emoji: '🚗', theme: 'travel',
+    weather: { icon: '🌤️', desc: 'Partly cloudy', high: 32, low: 25 },
     activities: [
       { time: '07:30', label: 'Final Phayao breakfast at hotel (included)' },
       { time: '08:30', label: 'Check out of KM Kwanphayao Hotel' },
@@ -121,6 +126,7 @@ export const days = [
   {
     day: 6, date: 'Tue 9 Jun', location: 'Chiang Mai',
     title: 'Wat Umong Forest Temple + Old City', emoji: '🌲', theme: 'culture',
+    weather: { icon: '🌤️', desc: 'Morning clear, afternoon clouds', high: 33, low: 25 },
     activities: [
       { time: '07:30', label: 'Grab to Wat Umong — forested temple at the foot of Doi Suthep. Arrive early, almost empty.', name: 'Wat Umong', coords: [18.786, 98.957], wiki: 'Wat_Umong' },
       { time: '08:00', label: 'Wat Umong (วัดอุโมงค์) — 700-year-old tunnels cut into a hillside, faded murals painted inside. Peaceful garden, koi pond, rabbits roam freely. Almost zero tourists. Fully flat and shaded — ideal for elders and stroller. Free entry.', name: 'Wat Umong', coords: [18.786, 98.957], wiki: 'Wat_Umong' },
@@ -136,6 +142,7 @@ export const days = [
   {
     day: 7, date: 'Wed 10 Jun', location: 'Chiang Mai',
     title: 'Warorot Market + Wiang Kum Kam Ruins', emoji: '🏛️', theme: 'culture',
+    weather: { icon: '🌦️', desc: 'Afternoon showers', high: 32, low: 25 },
     activities: [
       { time: '09:00', label: 'Lazy morning — everyone sleeps in' },
       { time: '10:30', label: 'Warorot Market — covered, flat, great for elders. Fresh produce, snacks, local goods.', name: 'Warorot Market', coords: [18.793, 99.003], wiki: 'Warorot_Market' },
@@ -151,6 +158,7 @@ export const days = [
   {
     day: 8, date: 'Thu 11 Jun', location: 'Chiang Mai',
     title: 'Elephant Sanctuary', emoji: '🐘', theme: 'adventure',
+    weather: { icon: '⛅', desc: 'Partly cloudy', high: 33, low: 26 },
     activities: [
       { time: '08:00', label: 'Hotel pickup for elephant sanctuary — call ahead to confirm accessibility for elders and baby. Half day, no riding.', name: 'Elephant Nature Park', coords: [19.029, 98.841], wiki: 'Elephant_Nature_Park' },
       { time: '08:30', label: 'At the sanctuary — mostly flat, shaded. Elders watch from benches. Baby will love the elephants.' },
@@ -165,6 +173,7 @@ export const days = [
   {
     day: 9, date: 'Fri 12 Jun', location: 'Chiang Mai',
     title: 'Doi Inthanon Day Trip', emoji: '🏔️', theme: 'adventure',
+    weather: { icon: '🌧️', desc: 'Misty & cool at summit (15°C)', high: 28, low: 18 },
     activities: [
       { time: '07:00', label: 'Depart for Doi Inthanon (~80 km, ~1.5 hrs). Hire private minivan so elders and baby ride comfortably (~1,800 THB total).', name: 'Doi Inthanon National Park', coords: [18.589, 98.486], wiki: 'Doi_Inthanon_National_Park' },
       { time: '08:30', label: 'Wachiratharn Waterfall — at full power in June. Viewing platform accessible for elders, stroller-friendly path.', name: 'Wachiratharn Waterfall', coords: [18.537, 98.506], wiki: 'Wachirathan_Waterfall' },
@@ -180,6 +189,7 @@ export const days = [
   {
     day: 10, date: 'Sat 13 Jun', location: 'Chiang Mai → Singapore',
     title: 'Departure Day', emoji: '🛫', theme: 'departure',
+    weather: { icon: '🌤️', desc: 'Partly cloudy', high: 32, low: 25 },
     activities: [
       { time: '08:00', label: 'Hotel breakfast' },
       { time: '09:00', label: 'Final pack, check out' },
