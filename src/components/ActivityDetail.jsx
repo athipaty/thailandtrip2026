@@ -40,7 +40,38 @@ function MiniMap({ coords, name }) {
 }
 
 // ─── Photo Gallery ────────────────────────────────────────────────────────────
-const SKIP_PATTERN = /\.(svg|gif)$|icon|logo|flag|seal|coat.of.arm|locator|map|wikimedia|commons-logo|edit|button/i
+const SKIP = /\.(svg|gif)$/i
+const SKIP_NAME = /\b(icon|logo|flag|seal|locator|wikimedia|commons|edit|button|stub|coa|blason|emblem|signature|portrait_placeholder)\b/i
+
+async function loadImages(wiki) {
+  const BASE = 'https://en.wikipedia.org/w/api.php?format=json&origin=*'
+
+  // Step 1 — get file names listed on the page
+  const listJson = await fetch(
+    `${BASE}&action=query&titles=${encodeURIComponent(wiki)}&prop=images&imlimit=30`
+  ).then(r => r.json())
+
+  const pages   = Object.values(listJson.query?.pages ?? {})
+  const allFiles = (pages[0]?.images ?? []).map(i => i.title)
+  const files   = allFiles
+    .filter(t => !SKIP.test(t) && !SKIP_NAME.test(t))
+    .slice(0, 12)
+
+  if (files.length === 0) return []
+
+  // Step 2 — batch-fetch image URLs + sizes (1200px wide thumbnail)
+  const infoJson = await fetch(
+    `${BASE}&action=query&titles=${files.map(encodeURIComponent).join('|')}&prop=imageinfo&iiprop=url|size&iiurlwidth=1200`
+  ).then(r => r.json())
+
+  return Object.values(infoJson.query?.pages ?? {})
+    .filter(p => p.imageinfo?.[0]?.url && (p.imageinfo[0].width ?? 999) >= 200)
+    .map(p => ({
+      full:  p.imageinfo[0].thumburl || p.imageinfo[0].url,
+      thumb: p.imageinfo[0].thumburl || p.imageinfo[0].url,
+      title: p.title.replace(/^File:/, '').replace(/_/g, ' ').replace(/\.[^.]+$/, ''),
+    }))
+}
 
 function WikiGallery({ wiki }) {
   const [images,  setImages]  = useState([])
@@ -55,41 +86,25 @@ function WikiGallery({ wiki }) {
     setActive(0)
 
     Promise.all([
-      fetch(`https://en.wikipedia.org/api/rest_v1/page/media-list/${encodeURIComponent(wiki)}`)
-        .then(r => r.json()).catch(() => ({ items: [] })),
+      loadImages(wiki),
       fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wiki)}`)
         .then(r => r.json()).catch(() => null),
-    ]).then(([media, sum]) => {
+    ]).then(([photos, sum]) => {
       setSummary(sum)
 
-      // Filter to real photos only
-      const photos = (media.items || [])
-        .filter(item =>
-          item.type === 'image' &&
-          item.original?.source &&
-          !SKIP_PATTERN.test(item.title) &&
-          (item.original.width ?? 0) >= 400
-        )
-        .slice(0, 10)
-        .map(item => ({
-          full:  item.original.source,
-          thumb: item.thumbnail?.source || item.original.source,
-          title: item.title.replace(/^File:/, '').replace(/_/g, ' ').replace(/\.[a-z]+$/i, ''),
-        }))
-
-      // If media-list gave nothing, fall back to summary thumbnail
+      // Fallback to summary thumbnail if action API returned nothing
       if (photos.length === 0 && sum?.thumbnail) {
-        photos.push({
+        photos = [{
           full:  sum.originalimage?.source || sum.thumbnail.source,
           thumb: sum.thumbnail.source,
           title: sum.title,
-        })
+        }]
       }
 
       if (photos.length === 0) { setStatus('none'); return }
       setImages(photos)
       setStatus('ok')
-    })
+    }).catch(() => setStatus('error'))
   }, [wiki])
 
   if (status === 'loading') return (
@@ -131,11 +146,11 @@ function WikiGallery({ wiki }) {
           <>
             <button
               onClick={() => setActive(i => (i - 1 + images.length) % images.length)}
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80 transition-colors"
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 flex items-center justify-center text-white text-xl font-bold hover:bg-black/90 transition-colors shadow-lg"
             >‹</button>
             <button
               onClick={() => setActive(i => (i + 1) % images.length)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-black/80 transition-colors"
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 flex items-center justify-center text-white text-xl font-bold hover:bg-black/90 transition-colors shadow-lg"
             >›</button>
           </>
         )}
