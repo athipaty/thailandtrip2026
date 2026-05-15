@@ -58,7 +58,9 @@ export const days = [
       { time: '08:30', label: 'Morning walk along Kwan Phayao lakefront promenade — flat, paved, stroller-friendly', name: 'Kwan Phayao', coords: [19.166, 99.904], commonsCategory: 'Phayao_lake' },
       { time: '09:30', label: 'Wat Si Khom Kham — lakeside temple, large gilded Lanna Buddha, stunning murals. Free entry.', name: 'Wat Si Khom Kham', coords: [19.164, 99.903], commonsCategory: 'Wat_Si_Khom_Kham' },
       { time: '11:00', label: 'Back to hotel — baby nap, elders rest (avoid 11am–2pm heat)' },
-      { time: '13:00', label: 'Lunch: กวยเตี๋ยวเนื้อศรีจันทร์ — beef noodle restaurant, highly rated local spot. (~50–80 THB)', name: 'กวยเตี๋ยวเนื้อศรีจันทร์', coords: [19.1679, 99.9051], commonsCategory: 'Beef_noodle_soup' },
+      { time: '13:00', label: 'Lunch: กวยเตี๋ยวเนื้อศรีจันทร์ — beef noodle restaurant, highly rated local spot. (~50–80 THB)', name: 'กวยเตี๋ยวเนื้อศรีจันทร์', coords: [19.1679, 99.9051], photos: [
+        { full: 'https://lh3.googleusercontent.com/gps-cs-s/APNQkAF6_mL3fD7t8MAWaelk_iEUNdUNnDs2XYIPFajIjV4cAlv7FnHLpskDqHPpeoPhhwyoNSd-Km0GHJvc2jgixPHGvvZa43dcg5np5aLv7p6ogpbieAr1HQVvUj8boWp5PfnJXj8WPQ=w1200-h900-k-no', title: 'กวยเตี๋ยวเนื้อศรีจันทร์' },
+      ] },
       { time: '15:00', label: 'Longtail boat to Wat Tilok Aram — ancient Lanna temple deliberately submerged when Kwan Phayao dam was built in 1939. The golden spire rises from the water. Eerie and beautiful. Unique to Phayao — nothing else like it in Thailand. ~300 THB/boat.', name: 'Wat Tilok Aram', coords: [19.163, 99.893], commonsCategory: 'Phayao_lake' },
       { time: '17:00', label: 'Friday Walking Street along the lakefront — flat, stroller-friendly. Khaep mu, sai ua, fresh snacks.', name: 'Phayao Walking Street', coords: [19.166, 99.899] },
       { time: '19:00', label: 'Early dinner at So Good Bar & Restaurant — lakeside, live acoustic from 8pm', name: 'So Good Bar', coords: [19.167, 99.906] },
