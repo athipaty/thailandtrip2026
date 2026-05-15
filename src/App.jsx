@@ -253,7 +253,6 @@ export default function App() {
             <div className="flex-1 min-w-0">
               <h1 className="text-2xl font-bold text-white drop-shadow">{tripInfo.title}</h1>
               <p className="text-sm text-white/90 mt-1">{tripInfo.travelers}</p>
-              <p className="text-xs text-white/75 mt-0.5">{tripInfo.style}</p>
             </div>
             <div className="flex items-center gap-2 text-center">
               <div className="px-3 py-2 bg-white/20 border border-white/30 rounded-xl">
@@ -266,21 +265,6 @@ export default function App() {
                 <div className="text-[10px] text-white/70">Return</div>
               </div>
             </div>
-          </div>
-
-          {/* Stats pills */}
-          <div className="flex gap-2 mt-4 flex-wrap">
-            {[
-              { icon: '📅', val: '10 days'     },
-              { icon: '👨‍👩‍👧', val: '5 people'    },
-              { icon: '🏙️', val: '2 cities'    },
-              { icon: '🚗', val: 'Corolla Cross' },
-            ].map(s => (
-              <div key={s.val} className="flex items-center gap-1.5 bg-white/20 border border-white/25 rounded-full px-3 py-1.5">
-                <span className="text-sm">{s.icon}</span>
-                <span className="text-xs font-semibold text-white">{s.val}</span>
-              </div>
-            ))}
           </div>
 
           {/* Hotel legs */}
