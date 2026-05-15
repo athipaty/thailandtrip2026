@@ -59,7 +59,7 @@ function FlightCard({ flight, direction }) {
       <div className="p-5">
         <div className="flex items-center justify-between mb-5">
           <span className={`text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border
-            ${isOut ? 'bg-orange-50 text-brand border-orange-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200'}`}>
+            ${isOut ? 'bg-indigo-50 text-brand border-indigo-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200'}`}>
             {isOut ? '✈️  Outbound' : '✈️  Return'}
           </span>
           <span className="text-xs font-medium text-gray-500 bg-gray-50 border border-gray-200 px-2.5 py-1 rounded-lg">
@@ -128,7 +128,7 @@ function DayCard({ day, isOpen, onToggle }) {
             </div>
             <div className="text-sm font-semibold text-gray-800 leading-snug">{day.title}</div>
             {!isOpen && (
-              <div className="text-xs text-gray-500 mt-0.5">{day.activities.length} activities · {day.budget}</div>
+              <div className="text-xs text-gray-500 mt-0.5">{day.activities.length} activities</div>
             )}
           </div>
 
@@ -183,28 +183,22 @@ function DayCard({ day, isOpen, onToggle }) {
 
             {/* Tips */}
             {day.tips.length > 0 && (
-              <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-3.5">
+              <div className="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-3.5">
                 <div className="flex items-center gap-1.5 mb-2.5">
                   <span className="text-base">💡</span>
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-amber-700">Tips for this day</span>
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-blue-700">Tips for this day</span>
                 </div>
                 <ul className="flex flex-col gap-2">
                   {day.tips.map((t, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <span className="text-amber-500 shrink-0 mt-0.5 font-bold">·</span>
-                      <span className="text-xs text-amber-900 leading-relaxed">{t}</span>
+                      <span className="text-blue-500 shrink-0 mt-0.5 font-bold">·</span>
+                      <span className="text-xs text-blue-900 leading-relaxed">{t}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             )}
 
-            {/* Budget */}
-            <div className="mt-3 flex justify-end">
-              <span className="flex items-center gap-1.5 text-xs font-medium text-gray-600 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-full">
-                💰 {day.budget}
-              </span>
-            </div>
           </div>
         )}
       </div>
@@ -244,12 +238,11 @@ export default function App() {
     <div className="min-h-screen bg-slate-50 text-gray-900">
 
       {/* Header */}
-      <header className="bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-400 px-5 py-6 shadow-lg">
+      <header className="bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-600 px-5 py-6 shadow-lg">
         <div className="max-w-2xl mx-auto">
 
           {/* Title row — single line on all screen sizes */}
           <div className="flex items-center gap-3">
-            <span className="text-4xl shrink-0">🇹🇭</span>
             <div className="flex-1 min-w-0">
               <h1 className="text-lg font-bold text-white leading-tight">{tripInfo.title}</h1>
               <p className="text-xs text-white/90 mt-0.5">{tripInfo.travelers}</p>

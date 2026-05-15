@@ -31,7 +31,7 @@ export const days = [
         { full: 'https://8adventures.com/wp-content/uploads/2025/11/Aeropuerto-Internacional-de-Chiang-Mai.jpg', title: 'Chiang Mai International Airport' },
         { full: 'https://www.tripsavvy.com/thmb/ntCUo8bQ9jrEeSjGLV6caDFkBQQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-473003890-8b7500690a964e2db488364258ad083e.jpg', title: 'Chiang Mai Airport terminal' },
       ] },
-      { time: '18:00', label: 'Pick up Toyota Fortuner — International Terminal, between Gate 8–9. Assistance: +66 (0) 8 4700 4384. Fit infant car seat before departing.' },
+      { time: '18:00', label: 'Pick up Toyota Fortuner — International Terminal, between Gate 8–9.' },
       { time: '18:30', label: 'Feed baby before the drive. Stock up at airport 7-Eleven if needed.' },
       { time: '18:45', label: 'Depart for Phayao (~130 km, ~2.5 hrs with baby stops)' },
       { time: '19:30', label: 'Midway rest stop — stretch, change baby, elders use toilet' },
