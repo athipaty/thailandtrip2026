@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { tripInfo, days, essentials } from './data/itinerary'
+import MapView from './components/MapView'
 
 const themeColor = {
   arrival:   'bg-indigo-500',
@@ -126,7 +127,7 @@ function EssentialsCard({ item }) {
   )
 }
 
-const TABS = ['itinerary', 'flights', 'essentials']
+const TABS = ['itinerary', 'map', 'flights', 'essentials']
 
 const PHAYAO_DAYS = [1, 2, 3, 4, 5]
 const CMX_DAYS    = [6, 7, 8, 9, 10]
@@ -210,6 +211,10 @@ export default function App() {
               />
             ))}
           </div>
+        )}
+
+        {tab === 'map' && (
+          <MapView activeDay={openDay ?? 1} />
         )}
 
         {tab === 'flights' && (
