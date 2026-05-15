@@ -55,7 +55,7 @@ export const days = [
       { time: '08:30', label: 'Morning walk along Kwan Phayao lakefront promenade — flat, paved, stroller-friendly', name: 'Kwan Phayao', coords: [19.166, 99.904], commonsCategory: 'Phayao_lake' },
       { time: '09:30', label: 'Wat Si Khom Kham — lakeside temple, large gilded Lanna Buddha, stunning murals. Free entry.', name: 'Wat Si Khom Kham', coords: [19.164, 99.903], commonsCategory: 'Wat_Si_Khom_Kham' },
       { time: '11:00', label: 'Back to hotel — baby nap, elders rest (avoid 11am–2pm heat)' },
-      { time: '13:00', label: 'Lunch: กวยเตี๋ยวเนื้อศรีจันทร์ — beef noodle restaurant, highly rated local spot. (~50–80 THB)', name: 'กวยเตี๋ยวเนื้อศรีจันทร์', coords: [19.1679, 99.9051] },
+      { time: '13:00', label: 'Lunch: กวยเตี๋ยวเนื้อศรีจันทร์ — beef noodle restaurant, highly rated local spot. (~50–80 THB)', name: 'กวยเตี๋ยวเนื้อศรีจันทร์', coords: [19.1679, 99.9051], commonsCategory: 'Beef_noodle_soup' },
       { time: '15:00', label: 'Leisure: lakeside cafe, cold drinks, watch the water' },
       { time: '17:00', label: 'Friday Walking Street along the lakefront — flat, stroller-friendly. Khaep mu, sai ua, fresh snacks.', name: 'Phayao Walking Street', coords: [19.166, 99.899] },
       { time: '19:00', label: 'Early dinner at So Good Bar & Restaurant — lakeside, live acoustic from 8pm', name: 'So Good Bar', coords: [19.167, 99.906] },
