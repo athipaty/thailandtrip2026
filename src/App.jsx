@@ -6,7 +6,31 @@ const themeColor = {
   culture:   'bg-violet-500',
   food:      'bg-red-500',
   adventure: 'bg-emerald-500',
+  travel:    'bg-sky-500',
   departure: 'bg-slate-500',
+}
+
+const locationColor = {
+  'Phayao':             'bg-emerald-900/60 text-emerald-300 border-emerald-700/50',
+  'Chiang Mai':         'bg-violet-900/60 text-violet-300 border-violet-700/50',
+  'Phayao → Chiang Rai (day trip)': 'bg-emerald-900/60 text-emerald-300 border-emerald-700/50',
+  'Phayao → Chiang Mai': 'bg-sky-900/60 text-sky-300 border-sky-700/50',
+  'Chiang Mai → Singapore': 'bg-slate-800 text-slate-300 border-slate-600/50',
+}
+
+function LegDivider({ label, dates, icon }) {
+  return (
+    <div className="flex items-center gap-3 my-3 px-1">
+      <div className="flex-1 h-px bg-white/10" />
+      <div className="flex items-center gap-2 text-xs font-semibold text-white/50 uppercase tracking-widest">
+        <span>{icon}</span>
+        <span>{label}</span>
+        <span className="text-white/25">·</span>
+        <span className="text-white/30 font-normal normal-case tracking-normal">{dates}</span>
+      </div>
+      <div className="flex-1 h-px bg-white/10" />
+    </div>
+  )
 }
 
 function FlightCard({ flight, direction }) {
@@ -41,6 +65,7 @@ function FlightCard({ flight, direction }) {
 
 function DayCard({ day, isOpen, onToggle }) {
   const dot = themeColor[day.theme] ?? 'bg-indigo-500'
+  const locStyle = locationColor[day.location] ?? 'bg-white/5 text-white/40 border-white/10'
   return (
     <div className={`bg-surface border rounded-xl overflow-hidden transition-colors ${isOpen ? 'border-brand' : 'border-white/10 hover:border-white/25'}`}>
       <button
@@ -50,7 +75,10 @@ function DayCard({ day, isOpen, onToggle }) {
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <span className="text-2xl shrink-0">{day.emoji}</span>
           <div className="min-w-0">
-            <div className="text-xs text-white/40 mb-0.5">Day {day.day} · {day.date}</div>
+            <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+              <span className="text-xs text-white/40">Day {day.day} · {day.date}</span>
+              <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded border ${locStyle}`}>{day.location}</span>
+            </div>
             <div className="text-sm font-semibold truncate">{day.title}</div>
           </div>
         </div>
@@ -100,6 +128,9 @@ function EssentialsCard({ item }) {
 
 const TABS = ['itinerary', 'flights', 'essentials']
 
+const PHAYAO_DAYS = [1, 2, 3, 4, 5]
+const CMX_DAYS    = [6, 7, 8, 9, 10]
+
 export default function App() {
   const [openDay, setOpenDay] = useState(1)
   const [tab, setTab] = useState('itinerary')
@@ -112,12 +143,29 @@ export default function App() {
           <span className="text-4xl">🇹🇭</span>
           <div>
             <h1 className="text-xl font-bold text-white">{tripInfo.title}</h1>
-            <p className="text-xs text-blue-300 mt-0.5">{tripInfo.destination} · {tripInfo.travelers} · {tripInfo.style}</p>
+            <p className="text-xs text-blue-300 mt-0.5">{tripInfo.travelers} · {tripInfo.style}</p>
           </div>
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex items-center gap-2 flex-wrap">
             <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 border border-white/20">4 Jun</span>
             <span className="text-white/40 text-sm">→</span>
             <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 border border-white/20">13 Jun 2026</span>
+          </div>
+        </div>
+        {/* Trip legs */}
+        <div className="max-w-2xl mx-auto mt-4 flex gap-3">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-900/40 border border-emerald-700/40">
+            <span>🏞️</span>
+            <div>
+              <div className="text-xs font-semibold text-emerald-300">Phayao</div>
+              <div className="text-[10px] text-emerald-400/60">4–8 Jun · accommodation booked</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-violet-900/40 border border-violet-700/40">
+            <span>🏯</span>
+            <div>
+              <div className="text-xs font-semibold text-violet-300">Chiang Mai</div>
+              <div className="text-[10px] text-violet-400/60">9–13 Jun · accommodation booked</div>
+            </div>
           </div>
         </div>
       </header>
@@ -142,9 +190,21 @@ export default function App() {
         {tab === 'itinerary' && (
           <div className="flex flex-col gap-2.5">
             <div className="bg-surface border border-white/10 rounded-xl px-4 py-3 text-sm text-white/40 mb-1">
-              <strong className="text-white/70">10 days</strong> · Chiang Mai base · Rainy season — brief afternoon showers, lush &amp; green, hotels ~20% cheaper
+              <strong className="text-white/70">10 days · 2 provinces</strong> · Rainy season — brief afternoon showers, lush &amp; green, hotels 20% cheaper. Car rental Jun 4 at CNX airport.
             </div>
-            {days.map(day => (
+
+            <LegDivider label="Phayao" dates="4–8 Jun" icon="🏞️" />
+            {days.filter(d => PHAYAO_DAYS.includes(d.day)).map(day => (
+              <DayCard
+                key={day.day}
+                day={day}
+                isOpen={openDay === day.day}
+                onToggle={() => setOpenDay(openDay === day.day ? null : day.day)}
+              />
+            ))}
+
+            <LegDivider label="Chiang Mai" dates="9–13 Jun" icon="🏯" />
+            {days.filter(d => CMX_DAYS.includes(d.day)).map(day => (
               <DayCard
                 key={day.day}
                 day={day}
