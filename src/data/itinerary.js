@@ -24,8 +24,8 @@ export const tripInfo = {
     },
   },
   legs: [
-    { label: 'Phayao', dates: '4–8 Jun', icon: '🏞️', color: 'text-emerald-400' },
-    { label: 'Chiang Mai', dates: '9–13 Jun', icon: '🏯', color: 'text-violet-400' },
+    { label: 'Phayao', dates: '4–8 Jun', icon: '🏞️', color: 'text-emerald-400', hotel: 'KM Kwanphayao Hotel', hotelNote: 'Lakeside · free breakfast · free bikes' },
+    { label: 'Chiang Mai', dates: '9–13 Jun', icon: '🏯', color: 'text-violet-400', hotel: 'Home in Nong Chom', hotelNote: 'Nong Chom, east Chiang Mai · ~15 min Grab to Old City' },
   ],
 };
 
@@ -42,7 +42,7 @@ export const days = [
       { time: '17:40', label: 'Land at Chiang Mai Airport (CNX)' },
       { time: '18:00', label: 'Pick up rental car at airport (pre-book Hertz / Sixt / Budget at Exit 1). Request 7-seat van for the group.' },
       { time: '18:30', label: 'Depart for Phayao via Highway 11 → Highway 1 (~130 km, ~2–2.5 hrs). Straightforward drive, well-lit highway.' },
-      { time: '21:00', label: 'Arrive Phayao — check in to hotel (accommodation already booked)' },
+      { time: '21:00', label: 'Arrive Phayao — check in to KM Kwanphayao Hotel (lakeside, free breakfast & bikes included)' },
       { time: '21:30', label: 'Late dinner: lakeside restaurant on Chai Kwan Road or Rob Wiang Road Night Market (~50–80 THB/dish)' },
     ],
     tips: [
@@ -135,7 +135,7 @@ export const days = [
       { time: '07:30', label: 'Final Phayao breakfast: morning market or hotel breakfast' },
       { time: '08:30', label: 'Check out of Phayao hotel' },
       { time: '09:00', label: 'Depart for Chiang Mai via scenic Route B — Highway 120 through Doi Luang National Park. Spectacular mountain and lake views (2.5 hrs).' },
-      { time: '11:30', label: 'Arrive Chiang Mai — check in (accommodation already booked)' },
+      { time: '11:30', label: 'Arrive Chiang Mai — check in to Home in Nong Chom (east side, ~15 min Grab to Old City/Nimman)' },
       { time: '13:00', label: 'First Chiang Mai lunch: Khao Soi Lung Prakit Kad Kom (Netflix-famous, ~60 THB) — the benchmark bowl' },
       { time: '15:00', label: 'Settle in, afternoon rest' },
       { time: '19:00', label: 'Explore Nimman area — cocktails at Surr Bar, dinner at a rooftop restaurant' },
@@ -165,6 +165,7 @@ export const days = [
       { time: '21:00', label: 'North Gate Jazz Co-Op — arrive by 8pm for seats, live jazz nightly from ~9pm. One of the best nights in the city.' },
     ],
     tips: [
+      'Staying in Nong Chom — use Grab to Old City (~60–80 THB, 15 min). Cheaper than a tuk-tuk.',
       'Old City temples are best in the morning before the rain hits',
       'North Gate Jazz: standing room only after 9pm — get there early',
     ],

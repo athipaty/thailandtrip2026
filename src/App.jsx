@@ -153,20 +153,16 @@ export default function App() {
         </div>
         {/* Trip legs */}
         <div className="max-w-2xl mx-auto mt-4 flex gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-900/40 border border-emerald-700/40">
-            <span>🏞️</span>
-            <div>
-              <div className="text-xs font-semibold text-emerald-300">Phayao</div>
-              <div className="text-[10px] text-emerald-400/60">4–8 Jun · accommodation booked</div>
+          {tripInfo.legs.map((leg, i) => (
+            <div key={i} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg ${i === 0 ? 'bg-emerald-900/40 border border-emerald-700/40' : 'bg-violet-900/40 border border-violet-700/40'}`}>
+              <span>{leg.icon}</span>
+              <div>
+                <div className={`text-xs font-semibold ${i === 0 ? 'text-emerald-300' : 'text-violet-300'}`}>{leg.label} · {leg.dates}</div>
+                <div className={`text-[10px] ${i === 0 ? 'text-emerald-400/70' : 'text-violet-400/70'}`}>{leg.hotel}</div>
+                <div className={`text-[10px] ${i === 0 ? 'text-emerald-400/40' : 'text-violet-400/40'}`}>{leg.hotelNote}</div>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-violet-900/40 border border-violet-700/40">
-            <span>🏯</span>
-            <div>
-              <div className="text-xs font-semibold text-violet-300">Chiang Mai</div>
-              <div className="text-[10px] text-violet-400/60">9–13 Jun · accommodation booked</div>
-            </div>
-          </div>
+          ))}
         </div>
       </header>
 
