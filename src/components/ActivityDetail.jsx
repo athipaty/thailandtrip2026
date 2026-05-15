@@ -40,72 +40,97 @@ function MiniMap({ coords, name }) {
 }
 
 // ─── Photo Gallery ────────────────────────────────────────────────────────────
-const SKIP = /\.(svg|gif)$/i
+const SKIP     = /\.(svg|gif)$/i
 const SKIP_NAME = /\b(icon|logo|flag|seal|locator|wikimedia|commons|edit|button|stub|coa|blason|emblem|signature|portrait_placeholder)\b/i
 
-async function loadImages(wiki) {
-  const BASE = 'https://en.wikipedia.org/w/api.php?format=json&origin=*'
+function toPhoto(page) {
+  const info = page.imageinfo?.[0]
+  if (!info?.url) return null
+  return {
+    full:  info.thumburl || info.url,
+    thumb: info.thumburl || info.url,
+    title: page.title.replace(/^File:/, '').replace(/_/g, ' ').replace(/\.[^.]+$/, ''),
+  }
+}
 
-  // Step 1 — get file names listed on the page
+async function fetchFileInfos(files, apiBase) {
+  if (!files.length) return []
+  const json = await fetch(
+    `${apiBase}&action=query&titles=${files.map(encodeURIComponent).join('|')}&prop=imageinfo&iiprop=url|size&iiurlwidth=1200`
+  ).then(r => r.json())
+  return Object.values(json.query?.pages ?? {}).map(toPhoto).filter(Boolean)
+}
+
+async function loadFromWiki(wiki) {
+  const BASE = 'https://en.wikipedia.org/w/api.php?format=json&origin=*'
   const listJson = await fetch(
     `${BASE}&action=query&titles=${encodeURIComponent(wiki)}&prop=images&imlimit=30`
   ).then(r => r.json())
-
-  const pages   = Object.values(listJson.query?.pages ?? {})
-  const allFiles = (pages[0]?.images ?? []).map(i => i.title)
-  const files   = allFiles
+  const files = Object.values(listJson.query?.pages ?? {})[0]?.images
+    ?.map(i => i.title)
     .filter(t => !SKIP.test(t) && !SKIP_NAME.test(t))
-    .slice(0, 12)
-
-  if (files.length === 0) return []
-
-  // Step 2 — batch-fetch image URLs + sizes (1200px wide thumbnail)
-  const infoJson = await fetch(
-    `${BASE}&action=query&titles=${files.map(encodeURIComponent).join('|')}&prop=imageinfo&iiprop=url|size&iiurlwidth=1200`
-  ).then(r => r.json())
-
-  return Object.values(infoJson.query?.pages ?? {})
-    .filter(p => p.imageinfo?.[0]?.url && (p.imageinfo[0].width ?? 999) >= 200)
-    .map(p => ({
-      full:  p.imageinfo[0].thumburl || p.imageinfo[0].url,
-      thumb: p.imageinfo[0].thumburl || p.imageinfo[0].url,
-      title: p.title.replace(/^File:/, '').replace(/_/g, ' ').replace(/\.[^.]+$/, ''),
-    }))
+    .slice(0, 12) ?? []
+  return fetchFileInfos(files, BASE)
 }
 
-function WikiGallery({ wiki }) {
+async function loadFromCommonsCategory(category) {
+  const BASE = 'https://commons.wikimedia.org/w/api.php?format=json&origin=*'
+  const listJson = await fetch(
+    `${BASE}&action=query&list=categorymembers&cmtitle=Category:${encodeURIComponent(category)}&cmtype=file&cmlimit=20`
+  ).then(r => r.json())
+  const files = (listJson.query?.categorymembers ?? [])
+    .map(m => m.title)
+    .filter(t => !SKIP.test(t) && !SKIP_NAME.test(t))
+    .slice(0, 12)
+  return fetchFileInfos(files, BASE)
+}
+
+function PhotoGallery({ activity }) {
   const [images,  setImages]  = useState([])
   const [summary, setSummary] = useState(null)
   const [status,  setStatus]  = useState('loading')
   const [active,  setActive]  = useState(0)
 
   useEffect(() => {
-    if (!wiki) { setStatus('none'); return }
-    setStatus('loading')
-    setImages([])
-    setActive(0)
+    setStatus('loading'); setImages([]); setActive(0)
 
-    Promise.all([
-      loadImages(wiki),
-      fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wiki)}`)
-        .then(r => r.json()).catch(() => null),
-    ]).then(([photos, sum]) => {
-      setSummary(sum)
-
-      // Fallback to summary thumbnail if action API returned nothing
-      if (photos.length === 0 && sum?.thumbnail) {
-        photos = [{
-          full:  sum.originalimage?.source || sum.thumbnail.source,
-          thumb: sum.thumbnail.source,
-          title: sum.title,
-        }]
-      }
-
-      if (photos.length === 0) { setStatus('none'); return }
-      setImages(photos)
+    // ── 1. Hardcoded photos array — display immediately ──────────────
+    if (activity.photos?.length) {
+      setImages(activity.photos.map(p => ({ full: p.full, thumb: p.full, title: p.title })))
       setStatus('ok')
-    }).catch(() => setStatus('error'))
-  }, [wiki])
+      return
+    }
+
+    // ── 2. Wikimedia Commons category ───────────────────────────────
+    if (activity.commonsCategory) {
+      loadFromCommonsCategory(activity.commonsCategory)
+        .then(photos => {
+          if (!photos.length) { setStatus('none'); return }
+          setImages(photos); setStatus('ok')
+        })
+        .catch(() => setStatus('error'))
+      return
+    }
+
+    // ── 3. Wikipedia article ────────────────────────────────────────
+    if (activity.wiki) {
+      Promise.all([
+        loadFromWiki(activity.wiki),
+        fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(activity.wiki)}`)
+          .then(r => r.json()).catch(() => null),
+      ]).then(([photos, sum]) => {
+        setSummary(sum)
+        if (!photos.length && sum?.thumbnail) {
+          photos = [{ full: sum.originalimage?.source || sum.thumbnail.source, thumb: sum.thumbnail.source, title: sum.title }]
+        }
+        if (!photos.length) { setStatus('none'); return }
+        setImages(photos); setStatus('ok')
+      }).catch(() => setStatus('error'))
+      return
+    }
+
+    setStatus('none')
+  }, [activity.photos, activity.commonsCategory, activity.wiki])
 
   if (status === 'loading') return (
     <div className="flex flex-col gap-3 animate-pulse">
@@ -116,7 +141,7 @@ function WikiGallery({ wiki }) {
     </div>
   )
 
-  if (status === 'none') return (
+  if (status === 'none' || status === 'error') return (
     <div className="flex flex-col items-center justify-center gap-2 py-16 text-white/30 text-sm">
       <span className="text-3xl">🖼️</span>
       No reference photos available
@@ -187,7 +212,6 @@ function WikiGallery({ wiki }) {
         <p className="text-sm text-white/50 leading-relaxed px-1 line-clamp-4">{summary.extract}</p>
       )}
 
-      {/* Wikipedia link */}
       {summary?.content_urls?.desktop?.page && (
         <a
           href={summary.content_urls.desktop.page}
@@ -238,7 +262,7 @@ export default function ActivityDetail({ activity, onClose }) {
               🗺️ Map
             </button>
           )}
-          {activity.wiki && (
+          {(activity.wiki || activity.photos || activity.commonsCategory) && (
             <button
               onClick={() => setTab('photo')}
               className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'photo' ? 'text-brand border-brand' : 'text-white/40 border-transparent hover:text-white/60'}`}
@@ -250,8 +274,8 @@ export default function ActivityDetail({ activity, onClose }) {
 
         {/* Content */}
         <div className="p-4 overflow-y-auto" style={{ maxHeight: '65vh' }}>
-          {tab === 'map'   && activity.coords && <MiniMap     coords={activity.coords} name={activity.name || 'Location'} />}
-          {tab === 'photo' && activity.wiki   && <WikiGallery wiki={activity.wiki} />}
+          {tab === 'map'   && activity.coords && <MiniMap coords={activity.coords} name={activity.name || 'Location'} />}
+          {tab === 'photo' && <PhotoGallery activity={activity} />}
         </div>
       </div>
     </div>

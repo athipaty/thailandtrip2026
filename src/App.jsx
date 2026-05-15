@@ -102,7 +102,7 @@ function DayCard({ day, isOpen, onToggle }) {
                   <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${dot}`} />
                   <div>
                     <span className="text-sm leading-relaxed text-white/80">{a.label}</span>
-                    {(a.coords || a.wiki) && (
+                    {(a.coords || a.wiki || a.photos || a.commonsCategory) && (
                       <div className="flex gap-1.5 mt-1.5">
                         {a.coords && (
                           <button
@@ -112,12 +112,12 @@ function DayCard({ day, isOpen, onToggle }) {
                             🗺️ Map
                           </button>
                         )}
-                        {a.wiki && (
+                        {(a.wiki || a.photos || a.commonsCategory) && (
                           <button
                             onClick={() => setSelected({ ...a, _openTab: 'photo' })}
                             className="flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/50 hover:bg-violet-900/40 hover:border-violet-700/50 hover:text-violet-300 transition-colors"
                           >
-                            📷 Photo
+                            📷 Photos
                           </button>
                         )}
                       </div>
