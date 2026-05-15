@@ -242,14 +242,19 @@ export default function ActivityDetail({ activity, onClose }) {
     >
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="relative w-full sm:max-w-lg bg-white border border-gray-200 rounded-t-2xl sm:rounded-2xl z-10 overflow-hidden shadow-2xl">
+      <div className="relative w-full sm:max-w-lg bg-white border border-gray-200 rounded-t-3xl sm:rounded-2xl z-10 overflow-hidden shadow-2xl">
+        {/* Drag handle (mobile) */}
+        <div className="flex justify-center pt-3 pb-1 sm:hidden">
+          <div className="w-10 h-1 rounded-full bg-gray-200" />
+        </div>
+
         {/* Header */}
-        <div className="flex items-start justify-between px-4 pt-4 pb-3 border-b border-gray-100">
+        <div className="flex items-start justify-between px-4 pt-2 pb-3 border-b border-gray-100">
           <div className="pr-8">
             <div className="text-xs text-gray-400 mb-0.5 uppercase tracking-wider">{activity.time}</div>
-            <div className="text-sm font-semibold text-gray-800 leading-snug">{activity.name || activity.label.split(' — ')[0]}</div>
+            <div className="text-base font-semibold text-gray-800 leading-snug">{activity.name || activity.label.split(' — ')[0]}</div>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-700 text-xl leading-none mt-0.5 shrink-0">✕</button>
+          <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 active:bg-gray-200 text-lg shrink-0">✕</button>
         </div>
 
         {/* Tabs */}
@@ -257,7 +262,7 @@ export default function ActivityDetail({ activity, onClose }) {
           {activity.coords && (
             <button
               onClick={() => setTab('map')}
-              className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'map' ? 'text-brand border-brand' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
+              className={`flex-1 py-3.5 text-sm font-semibold border-b-2 transition-colors active:bg-gray-50 ${tab === 'map' ? 'text-brand border-brand' : 'text-gray-400 border-transparent'}`}
             >
               🗺️ Map
             </button>
@@ -265,7 +270,7 @@ export default function ActivityDetail({ activity, onClose }) {
           {(activity.wiki || activity.photos || activity.commonsCategory) && (
             <button
               onClick={() => setTab('photo')}
-              className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'photo' ? 'text-brand border-brand' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
+              className={`flex-1 py-3.5 text-sm font-semibold border-b-2 transition-colors active:bg-gray-50 ${tab === 'photo' ? 'text-brand border-brand' : 'text-gray-400 border-transparent'}`}
             >
               📷 Photos
             </button>
@@ -273,7 +278,7 @@ export default function ActivityDetail({ activity, onClose }) {
         </div>
 
         {/* Content */}
-        <div className="p-4 overflow-y-auto" style={{ maxHeight: '65vh' }}>
+        <div className="p-4 overflow-y-auto" style={{ maxHeight: '70vh' }}>
           {tab === 'map'   && activity.coords && <MiniMap coords={activity.coords} name={activity.name || 'Location'} />}
           {tab === 'photo' && <PhotoGallery activity={activity} />}
         </div>

@@ -114,7 +114,7 @@ function DayCard({ day, isOpen, onToggle }) {
 
         {/* Header row */}
         <button onClick={onToggle}
-          className="w-full flex items-center gap-3 px-4 py-3.5 text-left hover:bg-gray-50 transition-colors">
+          className="w-full flex items-center gap-3 px-4 py-4 text-left active:bg-gray-50 transition-colors">
 
           <div className="text-xl w-10 h-10 flex items-center justify-center bg-gray-50 rounded-xl border border-gray-100 shrink-0">
             {day.emoji}
@@ -163,13 +163,13 @@ function DayCard({ day, isOpen, onToggle }) {
                         <div className="flex flex-wrap gap-2 mt-2">
                           {a.coords && (
                             <button onClick={() => setSelected(a)}
-                              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 hover:bg-emerald-100 transition-colors">
+                              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 active:bg-emerald-100 transition-colors">
                               🗺️ Map
                             </button>
                           )}
                           {(a.wiki || a.photos || a.commonsCategory) && (
                             <button onClick={() => setSelected({ ...a, _openTab: 'photo' })}
-                              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-violet-50 border border-violet-200 text-violet-700 hover:bg-violet-100 transition-colors">
+                              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-full bg-violet-50 border border-violet-200 text-violet-700 active:bg-violet-100 transition-colors">
                               📷 Photos
                             </button>
                           )}
@@ -247,22 +247,22 @@ export default function App() {
       <header className="bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-400 px-5 py-6 shadow-lg">
         <div className="max-w-2xl mx-auto">
 
-          {/* Title row */}
-          <div className="flex items-start gap-4 flex-wrap">
-            <span className="text-5xl">🇹🇭</span>
+          {/* Title row — single line on all screen sizes */}
+          <div className="flex items-center gap-3">
+            <span className="text-4xl shrink-0">🇹🇭</span>
             <div className="flex-1 min-w-0">
-              <h1 className="text-2xl font-bold text-white drop-shadow">{tripInfo.title}</h1>
-              <p className="text-sm text-white/90 mt-1">{tripInfo.travelers}</p>
+              <h1 className="text-lg font-bold text-white leading-tight">{tripInfo.title}</h1>
+              <p className="text-xs text-white/90 mt-0.5">{tripInfo.travelers}</p>
             </div>
-            <div className="flex items-center gap-2 text-center">
-              <div className="px-3 py-2 bg-white/20 border border-white/30 rounded-xl">
+            <div className="flex items-center gap-1.5 shrink-0">
+              <div className="px-2.5 py-1.5 bg-white/20 border border-white/30 rounded-xl text-center">
                 <div className="text-xs font-bold text-white">4 Jun</div>
-                <div className="text-[10px] text-white/70">Depart</div>
+                <div className="text-[9px] text-white/70">Depart</div>
               </div>
-              <span className="text-white/80 font-bold">→</span>
-              <div className="px-3 py-2 bg-white/20 border border-white/30 rounded-xl">
+              <span className="text-white/70 text-sm font-bold">→</span>
+              <div className="px-2.5 py-1.5 bg-white/20 border border-white/30 rounded-xl text-center">
                 <div className="text-xs font-bold text-white">13 Jun</div>
-                <div className="text-[10px] text-white/70">Return</div>
+                <div className="text-[9px] text-white/70">Return</div>
               </div>
             </div>
           </div>
@@ -270,7 +270,7 @@ export default function App() {
           {/* Hotel legs */}
           <div className="flex gap-3 mt-3 flex-wrap">
             {tripInfo.legs.map((leg, i) => (
-              <div key={i} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/25 border border-white/30">
+              <div key={i} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/25 border border-white/30 flex-1 min-w-0">
                 <span className="text-lg">{leg.icon}</span>
                 <div>
                   <div className="text-xs font-bold text-white">{leg.label} · {leg.dates}</div>
@@ -288,12 +288,12 @@ export default function App() {
         <div className="max-w-2xl mx-auto flex px-4">
           {TABS.map(t => (
             <button key={t.id} onClick={() => setTab(t.id)}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-3.5 text-xs font-semibold border-b-2 transition-colors
+              className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-2.5 border-b-2 transition-colors active:bg-gray-50
                 ${tab === t.id
                   ? 'text-brand border-brand'
-                  : 'text-gray-400 border-transparent hover:text-gray-600 hover:border-gray-200'}`}>
-              <span className="text-base">{t.icon}</span>
-              <span className="hidden sm:inline">{t.label}</span>
+                  : 'text-gray-400 border-transparent'}`}>
+              <span className="text-lg leading-none">{t.icon}</span>
+              <span className="text-[10px] font-semibold">{t.label}</span>
             </button>
           ))}
         </div>
