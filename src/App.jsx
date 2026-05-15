@@ -143,7 +143,8 @@ export default function App() {
           <span className="text-4xl">🇹🇭</span>
           <div>
             <h1 className="text-xl font-bold text-white">{tripInfo.title}</h1>
-            <p className="text-xs text-blue-300 mt-0.5">{tripInfo.travelers} · {tripInfo.style}</p>
+            <p className="text-xs text-blue-300 mt-0.5">{tripInfo.travelers}</p>
+            <p className="text-xs text-blue-400/60 mt-0.5">{tripInfo.style}</p>
           </div>
           <div className="ml-auto flex items-center gap-2 flex-wrap">
             <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 border border-white/20">4 Jun</span>
