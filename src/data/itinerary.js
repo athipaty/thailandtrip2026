@@ -27,12 +27,12 @@ export const days = [
     day: 1, date: 'Thu 4 Jun', location: 'Phayao',
     title: 'Arrival → Drive to Phayao', emoji: '✈️', theme: 'arrival',
     activities: [
-      { time: '17:40', label: 'Land at Chiang Mai Airport (CNX)', name: 'Chiang Mai Airport', coords: [18.768, 98.963] },
+      { time: '17:40', label: 'Land at Chiang Mai Airport (CNX)', name: 'Chiang Mai Airport', coords: [18.768, 98.963], wiki: 'Chiang_Mai_International_Airport' },
       { time: '18:00', label: 'Pick up rental car — 7-seat van + infant car seat (pre-book with Hertz/Sixt/Budget at Exit 1)' },
       { time: '18:30', label: 'Feed baby before the drive. Stock up at airport 7-Eleven if needed.' },
       { time: '18:45', label: 'Depart for Phayao via Highway 11 → Highway 1 (~130 km, ~2.5 hrs with baby stops)' },
       { time: '19:30', label: 'Midway rest stop — stretch, change baby, elders use toilet' },
-      { time: '21:30', label: 'Arrive Phayao — check in to KM Kwanphayao Hotel', name: 'KM Kwanphayao Hotel', coords: [19.165, 99.904] },
+      { time: '21:30', label: 'Arrive Phayao — check in to KM Kwanphayao Hotel', name: 'Phayao', coords: [19.165, 99.904], wiki: 'Phayao_Province' },
       { time: '22:00', label: 'Light late dinner at hotel or nearby. Keep first night simple.' },
     ],
     tips: ['Pre-book infant car seat with rental — not always available on the day', 'Download offline Google Maps for Phayao before landing', 'Night driving on Thai highways is safe — avoid mountain routes after dark'],
@@ -168,7 +168,7 @@ export const days = [
     activities: [
       { time: '08:00', label: 'Hotel breakfast' },
       { time: '09:00', label: 'Final pack, check out' },
-      { time: '09:30', label: 'Grab to Chiang Mai Airport — 2 cars for 5 people + luggage + stroller', name: 'Chiang Mai Airport', coords: [18.768, 98.963] },
+      { time: '09:30', label: 'Grab to Chiang Mai Airport — 2 cars for 5 people + luggage + stroller', name: 'Chiang Mai Airport', coords: [18.768, 98.963], wiki: 'Chiang_Mai_International_Airport' },
       { time: '10:00', label: 'Check-in — allow extra time for baby gear (stroller check) and elderly assistance' },
       { time: '11:00', label: 'Security and departure gate' },
       { time: '12:10', label: 'Scoot TR418 departs CNX → SIN · ref: FFQ7Rx' },
