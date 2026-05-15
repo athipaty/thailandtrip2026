@@ -17,7 +17,7 @@ function MiniMap({ coords, name }) {
   useEffect(() => {
     if (!ref.current || mapRef.current) return
     const map = L.map(ref.current, { center: coords, zoom: 15, zoomControl: true, attributionControl: false })
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map)
     L.marker(coords).addTo(map).bindPopup(name, { closeButton: false }).openPopup()
     mapRef.current = map
     return () => { map.remove(); mapRef.current = null }
@@ -31,7 +31,7 @@ function MiniMap({ coords, name }) {
       <a
         href={`https://maps.google.com/?q=${coords[0]},${coords[1]}`}
         target="_blank" rel="noreferrer"
-        className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white/70 hover:bg-white/10 transition-colors"
+        className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-600 hover:bg-gray-100 transition-colors"
       >
         🗺️ Open in Google Maps
       </a>
@@ -216,7 +216,7 @@ function PhotoGallery({ activity }) {
         <a
           href={summary.content_urls.desktop.page}
           target="_blank" rel="noreferrer"
-          className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white/70 hover:bg-white/10 transition-colors"
+          className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-600 hover:bg-gray-100 transition-colors"
         >
           📖 Read on Wikipedia
         </a>
@@ -240,24 +240,24 @@ export default function ActivityDetail({ activity, onClose }) {
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
       onClick={e => e.target === e.currentTarget && onClose()}
     >
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="relative w-full sm:max-w-lg bg-[#1a1a24] border border-white/10 rounded-t-2xl sm:rounded-2xl z-10 overflow-hidden">
+      <div className="relative w-full sm:max-w-lg bg-white border border-gray-200 rounded-t-2xl sm:rounded-2xl z-10 overflow-hidden shadow-2xl">
         {/* Header */}
-        <div className="flex items-start justify-between px-4 pt-4 pb-3 border-b border-white/10">
+        <div className="flex items-start justify-between px-4 pt-4 pb-3 border-b border-gray-100">
           <div className="pr-8">
-            <div className="text-xs text-white/40 mb-0.5 uppercase tracking-wider">{activity.time}</div>
-            <div className="text-sm font-semibold leading-snug">{activity.name || activity.label.split(' — ')[0]}</div>
+            <div className="text-xs text-gray-400 mb-0.5 uppercase tracking-wider">{activity.time}</div>
+            <div className="text-sm font-semibold text-gray-800 leading-snug">{activity.name || activity.label.split(' — ')[0]}</div>
           </div>
-          <button onClick={onClose} className="text-white/40 hover:text-white text-xl leading-none mt-0.5 shrink-0">✕</button>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-700 text-xl leading-none mt-0.5 shrink-0">✕</button>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-white/10">
+        <div className="flex border-b border-gray-100">
           {activity.coords && (
             <button
               onClick={() => setTab('map')}
-              className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'map' ? 'text-brand border-brand' : 'text-white/40 border-transparent hover:text-white/60'}`}
+              className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'map' ? 'text-brand border-brand' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
             >
               🗺️ Map
             </button>
@@ -265,7 +265,7 @@ export default function ActivityDetail({ activity, onClose }) {
           {(activity.wiki || activity.photos || activity.commonsCategory) && (
             <button
               onClick={() => setTab('photo')}
-              className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'photo' ? 'text-brand border-brand' : 'text-white/40 border-transparent hover:text-white/60'}`}
+              className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'photo' ? 'text-brand border-brand' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
             >
               📷 Photos
             </button>

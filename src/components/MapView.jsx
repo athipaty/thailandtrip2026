@@ -165,7 +165,7 @@ export default function MapView({ activeDay }) {
       zoom: 8,
       zoomControl: true,
     })
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; OpenStreetMap &copy; CARTO',
       maxZoom: 18,
     }).addTo(map)
@@ -219,29 +219,29 @@ export default function MapView({ activeDay }) {
       {/* Status bar */}
       <div className="flex gap-2 flex-wrap">
         {primaryCurrent && (
-          <div className="flex items-center gap-2 bg-amber-900/40 border border-amber-700/40 rounded-lg px-3 py-2 flex-1 min-w-0">
-            <span className="text-amber-400 text-lg shrink-0">📍</span>
+          <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 flex-1 min-w-0">
+            <span className="text-amber-500 text-lg shrink-0">📍</span>
             <div className="min-w-0">
-              <div className="text-[10px] text-amber-400/60 uppercase tracking-wider">Day {activeDay} · You are here</div>
-              <div className="text-sm font-semibold text-amber-300 truncate">{primaryCurrent.name}</div>
-              <div className="text-xs text-amber-400/50 truncate">{primaryCurrent.sub}</div>
+              <div className="text-[10px] text-amber-500/70 uppercase tracking-wider">Day {activeDay} · You are here</div>
+              <div className="text-sm font-semibold text-amber-700 truncate">{primaryCurrent.name}</div>
+              <div className="text-xs text-amber-600/60 truncate">{primaryCurrent.sub}</div>
             </div>
           </div>
         )}
         {primaryNext && (
-          <div className="flex items-center gap-2 bg-red-900/40 border border-red-700/40 rounded-lg px-3 py-2 flex-1 min-w-0">
+          <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-3 py-2 flex-1 min-w-0">
             <span className="text-red-400 text-lg shrink-0">➡️</span>
             <div className="min-w-0">
-              <div className="text-[10px] text-red-400/60 uppercase tracking-wider">Day {activeDay + 1} · Next stop</div>
-              <div className="text-sm font-semibold text-red-300 truncate">{primaryNext.name}</div>
-              <div className="text-xs text-red-400/50 truncate">{primaryNext.sub}</div>
+              <div className="text-[10px] text-red-400/70 uppercase tracking-wider">Day {activeDay + 1} · Next stop</div>
+              <div className="text-sm font-semibold text-red-600 truncate">{primaryNext.name}</div>
+              <div className="text-xs text-red-500/60 truncate">{primaryNext.sub}</div>
             </div>
           </div>
         )}
       </div>
 
       {/* Map */}
-      <div className="rounded-xl overflow-hidden border border-white/10" style={{ height: 420 }}>
+      <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm" style={{ height: 420 }}>
         <div ref={mapRef} style={{ height: '100%', width: '100%' }} />
       </div>
 
@@ -257,7 +257,7 @@ export default function MapView({ activeDay }) {
         ].map(({ color, label }) => (
           <div key={label} className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: color }} />
-            <span className="text-xs text-white/40">{label}</span>
+            <span className="text-xs text-gray-500">{label}</span>
           </div>
         ))}
       </div>
