@@ -324,7 +324,7 @@ export default function App() {
             <FlightCard flight={tripInfo.flight.return}   direction="Return" />
             <div className="text-center pt-1">
               <span className="inline-block text-xs text-gray-600 bg-white border border-gray-200 px-4 py-2 rounded-full shadow-sm">
-                Booking ref: <strong className="text-gray-900">{tripInfo.flight.outbound.ref}</strong> · Scoot Airlines
+                <strong className="text-gray-900">{tripInfo.flight.outbound.ref}</strong> · <strong className="text-gray-900">{tripInfo.flight.return.ref}</strong> · Scoot Airlines
               </span>
             </div>
           </div>

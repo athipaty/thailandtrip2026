@@ -5,12 +5,12 @@ export const tripInfo = {
   budget: 'Mid-range (~$80–150/day)',
   flight: {
     outbound: {
-      airline: 'Scoot', ref: 'FFQ7Rx',
+      airline: 'Scoot', ref: 'TR 676',
       from: 'Singapore', to: 'Chiang Mai (CNX)',
       date: 'Thu 4 Jun 2026', depart: '15:30', arrive: '17:40',
     },
     return: {
-      airline: 'Scoot', ref: 'FFQ7Rx',
+      airline: 'Scoot', ref: 'TR 681',
       from: 'Chiang Mai (CNX)', to: 'Singapore',
       date: 'Sat 13 Jun 2026', depart: '12:10', arrive: '16:20',
     },
