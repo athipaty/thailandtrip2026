@@ -94,7 +94,7 @@ export const days = [
       { time: '08:30', label: 'Check out of KM Kwanphayao Hotel' },
       { time: '09:00', label: 'Depart for Chiang Mai via scenic Route B (Hwy 120 through mountains) — lush in June, allow 3 hrs with stops' },
       { time: '10:15', label: 'Midway stop — stretch, feed baby, coffee, toilet' },
-      { time: '12:00', label: 'Arrive Chiang Mai — check in to Home in Nong Chom (east side, ~15 min Grab to Old City)', name: 'Nong Chom, Chiang Mai', coords: [18.843, 99.034] },
+      { time: '12:00', label: 'Arrive Chiang Mai — check in to Home in Nong Chom (east side, ~15 min Grab to Old City)', name: 'Chiang Mai', coords: [18.843, 99.034], wiki: 'Chiang_Mai' },
       { time: '13:00', label: 'Lunch: Khao Soi Lung Prakit Kad Kom — closes ~3pm, so time this right (~60 THB)', name: 'Khao Soi Lung Prakit Kad Kom', coords: [18.801, 98.968] },
       { time: '15:00', label: 'Settle in, afternoon rest for everyone' },
       { time: '18:30', label: 'Easy dinner near Nong Chom — local restaurant within walking distance' },
