@@ -28,7 +28,7 @@ export const days = [
     title: 'Arrival → Drive to Phayao', emoji: '✈️', theme: 'arrival',
     activities: [
       { time: '17:40', label: 'Land at Chiang Mai Airport (CNX)', name: 'Chiang Mai Airport', coords: [18.768, 98.963], wiki: 'Chiang_Mai_International_Airport' },
-      { time: '18:00', label: 'Pick up Toyota Corolla Cross (already booked) — collect at Exit 1 car rental desks. Fit infant car seat before departing.' },
+      { time: '18:00', label: 'Pick up Toyota Fortuner (already booked) — International Terminal, between Gate 8–9. Assistance: +66 (0) 8 4700 4384. Fit infant car seat before departing.' },
       { time: '18:30', label: 'Feed baby before the drive. Stock up at airport 7-Eleven if needed.' },
       { time: '18:45', label: 'Depart for Phayao via Highway 11 → Highway 1 (~130 km, ~2.5 hrs with baby stops)' },
       { time: '19:30', label: 'Midway rest stop — stretch, change baby, elders use toilet' },
@@ -44,7 +44,7 @@ export const days = [
       ] },
       { time: '22:00', label: 'Light late dinner at hotel or nearby. Keep first night simple.' },
     ],
-    tips: ['Pre-book infant car seat with rental — not always available on the day', 'Download offline Google Maps for Phayao before landing', 'Night driving on Thai highways is safe — avoid mountain routes after dark'],
+    tips: ['Car pick-up: International Terminal, Gate 8–9 · Call +66 (0) 8 4700 4384 if needed', 'Download offline Google Maps for Phayao before landing', 'Night driving on Thai highways is safe — avoid mountain routes after dark'],
     budget: '~800–1,200 THB/person',
   },
   {
@@ -108,7 +108,7 @@ export const days = [
       { time: '15:00', label: 'Settle in, afternoon rest for everyone' },
       { time: '18:30', label: 'Easy dinner near Nong Chom — local restaurant within walking distance' },
     ],
-    tips: ['Route B (Hwy 120) is scenic but winding — go slowly', 'Keep the Toyota Corolla Cross for Chiang Mai days — return it on Day 10 at CNX'],
+    tips: ['Route B (Hwy 120) is scenic but winding — go slowly', 'Keep the Toyota Fortuner for Chiang Mai days — return it on Day 10 at CNX'],
     budget: '~500–800 THB/person (fuel + lunch)',
   },
 
@@ -177,7 +177,7 @@ export const days = [
     activities: [
       { time: '08:00', label: 'Hotel breakfast' },
       { time: '09:00', label: 'Final pack, check out' },
-      { time: '09:30', label: 'Drive Toyota Corolla Cross to CNX Airport — return rental car before check-in. Allow extra time at the return desk.', name: 'Chiang Mai Airport', coords: [18.768, 98.963], wiki: 'Chiang_Mai_International_Airport' },
+      { time: '09:30', label: 'Drive Toyota Fortuner to CNX Airport — return rental car before check-in. Allow extra time at the return desk.', name: 'Chiang Mai Airport', coords: [18.768, 98.963], wiki: 'Chiang_Mai_International_Airport' },
       { time: '10:00', label: 'Check-in — allow extra time for baby gear (stroller check) and elderly assistance' },
       { time: '11:00', label: 'Security and departure gate' },
       { time: '12:10', label: 'Scoot TR418 departs CNX → SIN · ref: FFQ7Rx' },
@@ -214,9 +214,9 @@ export const essentials = [
   {
     category: 'Car Rental (CNX Airport)',
     items: [
-      'Toyota Corolla Cross — compact SUV, seats 5 (4 adults + baby car seat)',
-      'Already booked — collect at Exit 1: Hertz / Sixt / Avis / Budget',
-      'Boot may be tight with stroller + 5 bags — pack light or use roof carrier',
+      'Toyota Fortuner — 7-seat SUV, plenty of boot space for stroller + luggage',
+      'Already booked — International Terminal, Gate 8–9',
+      'Assistance phone: +66 (0) 8 4700 4384',
       'Need: passport + International Driving Permit (IDP)',
       'Plan 1 stop every 1.5–2 hrs for baby and elder comfort',
       'Full-to-full fuel policy — fill before returning',
