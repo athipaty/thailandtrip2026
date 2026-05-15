@@ -259,20 +259,6 @@ export default function App() {
               </div>
             </div>
           </div>
-
-          {/* Hotel legs */}
-          <div className="flex gap-3 mt-3 flex-wrap">
-            {tripInfo.legs.map((leg, i) => (
-              <div key={i} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/25 border border-white/30 flex-1 min-w-0">
-                <span className="text-lg">{leg.icon}</span>
-                <div>
-                  <div className="text-xs font-bold text-white">{leg.label} · {leg.dates}</div>
-                  <div className="text-[10px] text-white/90">{leg.hotel}</div>
-                  <div className="text-[10px] text-white/70">{leg.hotelNote}</div>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </header>
 
