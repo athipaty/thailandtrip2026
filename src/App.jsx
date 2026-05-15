@@ -305,18 +305,6 @@ export default function App() {
         {tab === 'itinerary' && (
           <div className="flex flex-col gap-2">
 
-            {/* Banner */}
-            <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3 shadow-sm flex gap-3 items-start">
-              <span className="text-2xl shrink-0">🌧️</span>
-              <div>
-                <div className="text-sm font-semibold text-gray-800">Rainy Season — Lush &amp; Green</div>
-                <p className="text-xs text-gray-600 leading-relaxed mt-0.5">
-                  Brief afternoon showers, cool mornings, 20% cheaper hotels.
-                  Outdoor activities planned before 11am · Rest 11am–2pm daily.
-                </p>
-              </div>
-            </div>
-
             <LegHeader label="Phayao" dates="4–8 Jun" dayRange="1–5" icon="🏞️"
               bgClass="bg-emerald-50 border border-emerald-200" />
             {days.filter(d => PHAYAO_DAYS.includes(d.day)).map(day => (
