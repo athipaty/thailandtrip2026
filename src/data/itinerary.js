@@ -27,7 +27,10 @@ export const days = [
     day: 1, date: 'Thu 4 Jun', location: 'Phayao',
     title: 'Arrival → Drive to Phayao', emoji: '✈️', theme: 'arrival',
     activities: [
-      { time: '17:40', label: 'Land at Chiang Mai Airport (CNX)', name: 'Chiang Mai Airport', coords: [18.768, 98.963], wiki: 'Chiang_Mai_International_Airport' },
+      { time: '17:40', label: 'Land at Chiang Mai Airport (CNX)', name: 'Chiang Mai Airport', coords: [18.768, 98.963], photos: [
+        { full: 'https://8adventures.com/wp-content/uploads/2025/11/Aeropuerto-Internacional-de-Chiang-Mai.jpg', title: 'Chiang Mai International Airport' },
+        { full: 'https://www.tripsavvy.com/thmb/ntCUo8bQ9jrEeSjGLV6caDFkBQQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-473003890-8b7500690a964e2db488364258ad083e.jpg', title: 'Chiang Mai Airport terminal' },
+      ] },
       { time: '18:00', label: 'Pick up Toyota Fortuner (already booked) — International Terminal, between Gate 8–9. Assistance: +66 (0) 8 4700 4384. Fit infant car seat before departing.' },
       { time: '18:30', label: 'Feed baby before the drive. Stock up at airport 7-Eleven if needed.' },
       { time: '18:45', label: 'Depart for Phayao via Highway 11 → Highway 1 (~130 km, ~2.5 hrs with baby stops)' },
@@ -178,7 +181,10 @@ export const days = [
     activities: [
       { time: '08:00', label: 'Hotel breakfast' },
       { time: '09:00', label: 'Final pack, check out' },
-      { time: '09:30', label: 'Drive Toyota Fortuner to CNX Airport — return rental car before check-in. Allow extra time at the return desk.', name: 'Chiang Mai Airport', coords: [18.768, 98.963], wiki: 'Chiang_Mai_International_Airport' },
+      { time: '09:30', label: 'Drive Toyota Fortuner to CNX Airport — return rental car before check-in. Allow extra time at the return desk.', name: 'Chiang Mai Airport', coords: [18.768, 98.963], photos: [
+        { full: 'https://8adventures.com/wp-content/uploads/2025/11/Aeropuerto-Internacional-de-Chiang-Mai.jpg', title: 'Chiang Mai International Airport' },
+        { full: 'https://www.tripsavvy.com/thmb/ntCUo8bQ9jrEeSjGLV6caDFkBQQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-473003890-8b7500690a964e2db488364258ad083e.jpg', title: 'Chiang Mai Airport terminal' },
+      ] },
       { time: '10:00', label: 'Check-in — allow extra time for baby gear (stroller check) and elderly assistance' },
       { time: '11:00', label: 'Security and departure gate' },
       { time: '12:10', label: 'Scoot TR418 departs CNX → SIN · ref: FFQ7Rx' },
