@@ -1,37 +1,37 @@
 import { useState } from 'react'
 import { tripInfo, days, essentials } from './data/itinerary'
-import './App.css'
 
-const themeColors = {
-  arrival: '#4f46e5',
-  culture: '#7c3aed',
-  food: '#dc2626',
-  adventure: '#059669',
-  departure: '#64748b',
+const themeColor = {
+  arrival:   'bg-indigo-500',
+  culture:   'bg-violet-500',
+  food:      'bg-red-500',
+  adventure: 'bg-emerald-500',
+  departure: 'bg-slate-500',
 }
 
 function FlightCard({ flight, direction }) {
+  const isOut = direction === 'Outbound'
   return (
-    <div className="flight-card">
-      <div className="flight-direction">{direction}</div>
-      <div className="flight-main">
-        <div className="flight-city">
-          <span className="flight-code">{direction === 'Outbound' ? 'SIN' : 'CNX'}</span>
-          <span className="flight-time">{flight.depart}</span>
+    <div className="bg-surface border border-white/10 rounded-xl p-5">
+      <div className="text-xs font-bold uppercase tracking-widest text-brand mb-4">{direction}</div>
+      <div className="flex items-center gap-4 mb-4">
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-lg font-bold">{isOut ? 'SIN' : 'CNX'}</span>
+          <span className="text-3xl font-light">{flight.depart}</span>
         </div>
-        <div className="flight-line">
-          <div className="flight-dot" />
-          <div className="flight-dash" />
-          <span className="flight-plane">✈</span>
-          <div className="flight-dash" />
-          <div className="flight-dot" />
+        <div className="flex-1 flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-brand shrink-0" />
+          <div className="flex-1 h-px bg-white/10" />
+          <span className="text-brand text-lg">✈</span>
+          <div className="flex-1 h-px bg-white/10" />
+          <div className="w-2 h-2 rounded-full bg-brand shrink-0" />
         </div>
-        <div className="flight-city">
-          <span className="flight-code">{direction === 'Outbound' ? 'CNX' : 'SIN'}</span>
-          <span className="flight-time">{flight.arrive}</span>
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-lg font-bold">{isOut ? 'CNX' : 'SIN'}</span>
+          <span className="text-3xl font-light">{flight.arrive}</span>
         </div>
       </div>
-      <div className="flight-meta">
+      <div className="flex justify-between text-xs text-white/40 border-t border-white/10 pt-3">
         <span>{flight.date}</span>
         <span>{flight.airline} · {flight.ref}</span>
       </div>
@@ -40,37 +40,43 @@ function FlightCard({ flight, direction }) {
 }
 
 function DayCard({ day, isOpen, onToggle }) {
-  const color = themeColors[day.theme] || '#4f46e5'
+  const dot = themeColor[day.theme] ?? 'bg-indigo-500'
   return (
-    <div className={`day-card ${isOpen ? 'open' : ''}`} style={{ '--accent': color }}>
-      <button className="day-header" onClick={onToggle}>
-        <div className="day-header-left">
-          <span className="day-emoji">{day.emoji}</span>
-          <div>
-            <div className="day-label">Day {day.day} · {day.date}</div>
-            <div className="day-title">{day.title}</div>
+    <div className={`bg-surface border rounded-xl overflow-hidden transition-colors ${isOpen ? 'border-brand' : 'border-white/10 hover:border-white/25'}`}>
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between px-4 py-4 text-left hover:bg-white/[0.02] transition-colors"
+      >
+        <div className="flex items-center gap-3 flex-1 min-w-0">
+          <span className="text-2xl shrink-0">{day.emoji}</span>
+          <div className="min-w-0">
+            <div className="text-xs text-white/40 mb-0.5">Day {day.day} · {day.date}</div>
+            <div className="text-sm font-semibold truncate">{day.title}</div>
           </div>
         </div>
-        <div className="day-header-right">
-          <span className="day-budget">{day.budget}</span>
-          <span className="day-chevron">{isOpen ? '▲' : '▼'}</span>
+        <div className="flex items-center gap-3 shrink-0 ml-3">
+          <span className="hidden sm:block text-xs text-white/40 bg-surface2 px-2 py-1 rounded">{day.budget}</span>
+          <span className="text-white/30 text-xs">{isOpen ? '▲' : '▼'}</span>
         </div>
       </button>
+
       {isOpen && (
-        <div className="day-body">
-          <div className="timeline">
+        <div className="px-4 pb-5 border-t border-white/10">
+          <div className="pt-4 flex flex-col gap-3">
             {day.activities.map((a, i) => (
-              <div key={i} className="timeline-item">
-                <div className="timeline-time">{a.time}</div>
-                <div className="timeline-dot" style={{ background: color }} />
-                <div className="timeline-label">{a.label}</div>
+              <div key={i} className="grid gap-2.5 items-start" style={{ gridTemplateColumns: '48px 12px 1fr' }}>
+                <span className="text-xs font-semibold text-white/40 text-right pt-0.5">{a.time}</span>
+                <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${dot}`} />
+                <span className="text-sm leading-relaxed text-white/80">{a.label}</span>
               </div>
             ))}
           </div>
           {day.tips.length > 0 && (
-            <div className="day-tips">
-              <span className="tips-label">Tips</span>
-              {day.tips.map((t, i) => <span key={i} className="tip">{t}</span>)}
+            <div className="mt-4 bg-surface2 rounded-lg px-3 py-2.5 flex flex-wrap gap-2 items-center">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 shrink-0">Tips</span>
+              {day.tips.map((t, i) => (
+                <span key={i} className="text-xs text-white/40 bg-white/5 border border-white/10 px-2.5 py-0.5 rounded-full">{t}</span>
+              ))}
             </div>
           )}
         </div>
@@ -81,53 +87,62 @@ function DayCard({ day, isOpen, onToggle }) {
 
 function EssentialsCard({ item }) {
   return (
-    <div className="essential-card">
-      <h3>{item.category}</h3>
-      <ul>
-        {item.items.map((i, idx) => <li key={idx}>{i}</li>)}
+    <div className="bg-surface border border-white/10 rounded-xl p-4">
+      <h3 className="text-[11px] font-bold uppercase tracking-wider text-brand mb-3">{item.category}</h3>
+      <ul className="flex flex-col gap-2">
+        {item.items.map((it, i) => (
+          <li key={i} className="text-sm text-white/50 pl-3 relative leading-snug before:content-['·'] before:absolute before:left-0 before:text-brand before:font-bold">{it}</li>
+        ))}
       </ul>
     </div>
   )
 }
+
+const TABS = ['itinerary', 'flights', 'essentials']
 
 export default function App() {
   const [openDay, setOpenDay] = useState(1)
   const [tab, setTab] = useState('itinerary')
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <div className="header-inner">
-          <div className="header-flag">🇹🇭</div>
+    <div className="min-h-screen bg-[#0f0f13] text-white">
+      {/* Header */}
+      <header className="bg-gradient-to-br from-[#1a0a2e] via-[#16213e] to-[#0f3460] border-b border-white/10 px-5 py-6">
+        <div className="max-w-2xl mx-auto flex items-center gap-4 flex-wrap">
+          <span className="text-4xl">🇹🇭</span>
           <div>
-            <h1>{tripInfo.title}</h1>
-            <p className="header-sub">{tripInfo.destination} · {tripInfo.travelers} · {tripInfo.style}</p>
+            <h1 className="text-xl font-bold text-white">{tripInfo.title}</h1>
+            <p className="text-xs text-blue-300 mt-0.5">{tripInfo.destination} · {tripInfo.travelers} · {tripInfo.style}</p>
           </div>
-          <div className="header-dates">
-            <span className="date-badge">4 Jun</span>
-            <span className="date-sep">→</span>
-            <span className="date-badge">13 Jun 2026</span>
+          <div className="ml-auto flex items-center gap-2">
+            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 border border-white/20">4 Jun</span>
+            <span className="text-white/40 text-sm">→</span>
+            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 border border-white/20">13 Jun 2026</span>
           </div>
         </div>
       </header>
 
-      <nav className="tab-nav">
-        {['itinerary', 'flights', 'essentials'].map(t => (
-          <button
-            key={t}
-            className={`tab-btn ${tab === t ? 'active' : ''}`}
-            onClick={() => setTab(t)}
-          >
-            {t.charAt(0).toUpperCase() + t.slice(1)}
-          </button>
-        ))}
+      {/* Tabs */}
+      <nav className="bg-surface border-b border-white/10">
+        <div className="max-w-2xl mx-auto flex px-5 gap-1">
+          {TABS.map(t => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`py-3.5 px-4 text-sm font-medium border-b-2 transition-colors capitalize ${tab === t ? 'text-brand border-brand' : 'text-white/40 border-transparent hover:text-white/70'}`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
       </nav>
 
-      <main className="app-main">
+      {/* Content */}
+      <main className="max-w-2xl mx-auto px-4 py-5 pb-20">
         {tab === 'itinerary' && (
-          <div className="itinerary">
-            <div className="itinerary-intro">
-              <strong>10 days</strong> · Chiang Mai base · Rainy season (brief afternoon showers, lush & green, 20% cheaper hotels)
+          <div className="flex flex-col gap-2.5">
+            <div className="bg-surface border border-white/10 rounded-xl px-4 py-3 text-sm text-white/40 mb-1">
+              <strong className="text-white/70">10 days</strong> · Chiang Mai base · Rainy season — brief afternoon showers, lush &amp; green, hotels ~20% cheaper
             </div>
             {days.map(day => (
               <DayCard
@@ -141,17 +156,17 @@ export default function App() {
         )}
 
         {tab === 'flights' && (
-          <div className="flights-tab">
+          <div className="flex flex-col gap-3">
             <FlightCard flight={tripInfo.flight.outbound} direction="Outbound" />
             <FlightCard flight={tripInfo.flight.return} direction="Return" />
-            <div className="flight-note">
-              Booking ref: <strong>{tripInfo.flight.outbound.ref}</strong> · Scoot Airlines
-            </div>
+            <p className="text-center text-sm text-white/30 pt-1">
+              Booking ref: <strong className="text-white/60">{tripInfo.flight.outbound.ref}</strong> · Scoot Airlines
+            </p>
           </div>
         )}
 
         {tab === 'essentials' && (
-          <div className="essentials-grid">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {essentials.map((e, i) => <EssentialsCard key={i} item={e} />)}
           </div>
         )}
