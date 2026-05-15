@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { tripInfo, days, essentials } from './data/itinerary'
 import MapView from './components/MapView'
+import ActivityDetail from './components/ActivityDetail'
 
 const themeColor = {
   arrival:   'bg-indigo-500',
@@ -65,52 +66,85 @@ function FlightCard({ flight, direction }) {
 }
 
 function DayCard({ day, isOpen, onToggle }) {
+  const [selected, setSelected] = useState(null)
   const dot = themeColor[day.theme] ?? 'bg-indigo-500'
   const locStyle = locationColor[day.location] ?? 'bg-white/5 text-white/40 border-white/10'
-  return (
-    <div className={`bg-surface border rounded-xl overflow-hidden transition-colors ${isOpen ? 'border-brand' : 'border-white/10 hover:border-white/25'}`}>
-      <button
-        onClick={onToggle}
-        className="w-full flex items-center justify-between px-4 py-4 text-left hover:bg-white/[0.02] transition-colors"
-      >
-        <div className="flex items-center gap-3 flex-1 min-w-0">
-          <span className="text-2xl shrink-0">{day.emoji}</span>
-          <div className="min-w-0">
-            <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-              <span className="text-xs text-white/40">Day {day.day} · {day.date}</span>
-              <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded border ${locStyle}`}>{day.location}</span>
-            </div>
-            <div className="text-sm font-semibold truncate">{day.title}</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 shrink-0 ml-3">
-          <span className="hidden sm:block text-xs text-white/40 bg-surface2 px-2 py-1 rounded">{day.budget}</span>
-          <span className="text-white/30 text-xs">{isOpen ? '▲' : '▼'}</span>
-        </div>
-      </button>
 
-      {isOpen && (
-        <div className="px-4 pb-5 border-t border-white/10">
-          <div className="pt-4 flex flex-col gap-3">
-            {day.activities.map((a, i) => (
-              <div key={i} className="grid gap-2.5 items-start" style={{ gridTemplateColumns: '48px 12px 1fr' }}>
-                <span className="text-xs font-semibold text-white/40 text-right pt-0.5">{a.time}</span>
-                <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${dot}`} />
-                <span className="text-sm leading-relaxed text-white/80">{a.label}</span>
+  return (
+    <>
+      <div className={`bg-surface border rounded-xl overflow-hidden transition-colors ${isOpen ? 'border-brand' : 'border-white/10 hover:border-white/25'}`}>
+        <button
+          onClick={onToggle}
+          className="w-full flex items-center justify-between px-4 py-4 text-left hover:bg-white/[0.02] transition-colors"
+        >
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+            <span className="text-2xl shrink-0">{day.emoji}</span>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                <span className="text-xs text-white/40">Day {day.day} · {day.date}</span>
+                <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded border ${locStyle}`}>{day.location}</span>
               </div>
-            ))}
+              <div className="text-sm font-semibold truncate">{day.title}</div>
+            </div>
           </div>
-          {day.tips.length > 0 && (
-            <div className="mt-4 bg-surface2 rounded-lg px-3 py-2.5 flex flex-wrap gap-2 items-center">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 shrink-0">Tips</span>
-              {day.tips.map((t, i) => (
-                <span key={i} className="text-xs text-white/40 bg-white/5 border border-white/10 px-2.5 py-0.5 rounded-full">{t}</span>
+          <div className="flex items-center gap-3 shrink-0 ml-3">
+            <span className="hidden sm:block text-xs text-white/40 bg-surface2 px-2 py-1 rounded">{day.budget}</span>
+            <span className="text-white/30 text-xs">{isOpen ? '▲' : '▼'}</span>
+          </div>
+        </button>
+
+        {isOpen && (
+          <div className="px-4 pb-5 border-t border-white/10">
+            <div className="pt-4 flex flex-col gap-3">
+              {day.activities.map((a, i) => (
+                <div key={i} className="grid gap-x-2.5 gap-y-1 items-start" style={{ gridTemplateColumns: '48px 12px 1fr' }}>
+                  <span className="text-xs font-semibold text-white/40 text-right pt-0.5">{a.time}</span>
+                  <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${dot}`} />
+                  <div>
+                    <span className="text-sm leading-relaxed text-white/80">{a.label}</span>
+                    {(a.coords || a.wiki) && (
+                      <div className="flex gap-1.5 mt-1.5">
+                        {a.coords && (
+                          <button
+                            onClick={() => setSelected(a)}
+                            className="flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/50 hover:bg-emerald-900/40 hover:border-emerald-700/50 hover:text-emerald-300 transition-colors"
+                          >
+                            🗺️ Map
+                          </button>
+                        )}
+                        {a.wiki && (
+                          <button
+                            onClick={() => setSelected({ ...a, _openTab: 'photo' })}
+                            className="flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/50 hover:bg-violet-900/40 hover:border-violet-700/50 hover:text-violet-300 transition-colors"
+                          >
+                            📷 Photo
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
               ))}
             </div>
-          )}
-        </div>
+            {day.tips.length > 0 && (
+              <div className="mt-4 bg-surface2 rounded-lg px-3 py-2.5 flex flex-wrap gap-2 items-center">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 shrink-0">Tips</span>
+                {day.tips.map((t, i) => (
+                  <span key={i} className="text-xs text-white/40 bg-white/5 border border-white/10 px-2.5 py-0.5 rounded-full">{t}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {selected && (
+        <ActivityDetail
+          activity={selected}
+          onClose={() => setSelected(null)}
+        />
       )}
-    </div>
+    </>
   )
 }
 
